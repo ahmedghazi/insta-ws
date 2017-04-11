@@ -8,7 +8,7 @@ var config = {
     app: {
       name: 'insta-ws'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3004,
     db: 'mongodb://localhost/insta-ws-development'
   },
 
@@ -17,7 +17,7 @@ var config = {
     app: {
       name: 'insta-ws'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3004,
     db: 'mongodb://localhost/insta-ws-test'
   },
 
@@ -26,7 +26,7 @@ var config = {
     app: {
       name: 'insta-ws'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3004,
     db: 'mongodb://localhost/insta-ws-production'
   }
 };
