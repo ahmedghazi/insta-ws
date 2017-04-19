@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+  
+    div
+        h2= user.username
+        each media in user.media
+            img(src="#{media.images.low_resolution.url}")
+
