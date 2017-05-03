@@ -291,7 +291,6 @@ router.get('/email', function (req, res, next) {
 	    subject : "insta ws cron",
 	    text : "Cron AAAAA on "+new Date()+" done"
 	}
-	//console.log(mailOptions)
 	sendEmail(mailOptions, function(mess){
 		res.end(mess);
 	});
@@ -306,7 +305,6 @@ function sendEmail(mailOptions, cb){
         }
     });
 
-    //console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
         if(error){
             console.log(error);

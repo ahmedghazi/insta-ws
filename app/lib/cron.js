@@ -91,8 +91,6 @@ function handleUsersMedia(next){
                         callback()
                     }
                 });
-                //console.log(lastMedia);
-
                 
             }, function(){
                 console.log("done")
@@ -121,7 +119,6 @@ function sendEmail(mailOptions, cb){
         }
     });
 
-    //console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
         if(error){
             console.log(error);
