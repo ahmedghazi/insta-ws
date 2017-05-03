@@ -57,7 +57,7 @@ function handleUsersMedia(next){
 
                         async.each(body.items, function(item, callback2){
                             max_id = item.id;
-                            console.log(max_id, item.location)
+                            console.log(max_id)
                             
                             var query = { id: item.id };
                             var update = {

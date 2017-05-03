@@ -11,6 +11,10 @@ module.exports = function (app) {
   app.use('/api', router);
 };
 
+router.get('/', function (req, res, next) {
+	return res.json({message:"Coucou :)"})
+});
+
 router.get('/g/:username/:page', function (req, res, next) {
 	var skip = req.params.page * postsPerPage;
 	User
@@ -33,12 +37,7 @@ router.get('/g/:username/:page', function (req, res, next) {
 	     		res.redirect('/api/c/'+req.params.username)
 	     	else
 	     		return res.send(user);
-	     	/*
-	        return res.render('page', {
-	        	title: 'User',
-	          	user: user
-	        });
-	    	*/
+	
 	});
 });
 
@@ -52,8 +51,6 @@ router.get('/d/:username', function (req, res, next) {
 
 	    res.redirect('/api/');
 	});
-
-	
 });
 
 router.get('/c/:username', function (req, res, next) {
@@ -71,19 +68,21 @@ router.get('/c/:username', function (req, res, next) {
 	            async.each(body.items, function(item, callback){
 	            	max_id = item.id;
 	            	console.log(max_id)
+	            	console.log(item)
 
             	    var query = { id: item.id };
             	    var update = {
 	            		id: item.id,
 	            		type: item.type,
 		            	created_time: item.created_time,
-		            	location: item.location.name,
+		            	//location: item.location.name,
 		            	images: item.images,
 		            	likes_count: item.likes.count,
 		            	videos: item.videos,
 		            	video_views: item.video_views,
 	            	}
-
+	            	if(item.location)update.location = item.location.name;
+	            	
 	            	Media.findOneAndUpdate(query, update, {upsert: true, 'new': true}, function (err, media, raw) {
 	            	    if (err) {
 	            	        return console.log(err);
