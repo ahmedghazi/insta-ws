@@ -3,6 +3,7 @@ var express = require('express'),
   mongoose = require('mongoose'),
   request = require('request'),
   async = require("async"),
+  nodemailer = require("nodemailer"),
   User = mongoose.model('User'),
   Media = mongoose.model('Media'),
   postsPerPage = 10;
@@ -82,7 +83,7 @@ router.get('/c/:username', function (req, res, next) {
 		            	video_views: item.video_views,
 	            	}
 	            	if(item.location)update.location = item.location.name;
-	            	
+
 	            	Media.findOneAndUpdate(query, update, {upsert: true, 'new': true}, function (err, media, raw) {
 	            	    if (err) {
 	            	        return console.log(err);
@@ -284,3 +285,35 @@ router.get('/test', function (req, res, next) {
 	    });
 });
 
+router.get('/email', function (req, res, next) {
+	var mailOptions = {
+	    to : "atmet.ghazi@gmail.com",
+	    subject : "insta ws cron",
+	    text : "Cron AAAAA on "+new Date()+" done"
+	}
+	console.log(mailOptions)
+	sendEmail(mailOptions, function(mess){
+		res.end(mess);
+	});
+});
+
+function sendEmail(mailOptions, cb){
+    var smtpTransport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: "atmet.ghazi",
+            pass: "$vviirrggiill*"
+        }
+    });
+
+    //console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
+            return cb("Message error: " + error)
+        }else{
+            console.log("Message sent: " + response.message);
+            return cb("Message sent: " + response.message)
+        }
+    });
+}
