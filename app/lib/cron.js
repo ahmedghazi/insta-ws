@@ -113,7 +113,7 @@ function handleUsersMedia(next){
 }
 
 function sendEmail(mailOptions, cb){
-    var smtpTransport = nodemailer.createTransport({
+    var smtpTransport = nodemailer.createTransport('SMTP',{
         service: "Gmail",
         auth: {
             user: "atmet.ghazi",

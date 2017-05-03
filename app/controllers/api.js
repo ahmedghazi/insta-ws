@@ -291,14 +291,14 @@ router.get('/email', function (req, res, next) {
 	    subject : "insta ws cron",
 	    text : "Cron AAAAA on "+new Date()+" done"
 	}
-	console.log(mailOptions)
+	//console.log(mailOptions)
 	sendEmail(mailOptions, function(mess){
 		res.end(mess);
 	});
 });
 
 function sendEmail(mailOptions, cb){
-    var smtpTransport = nodemailer.createTransport({
+    var smtpTransport = nodemailer.createTransport('SMTP',{
         service: "Gmail",
         auth: {
             user: "atmet.ghazi",
