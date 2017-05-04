@@ -19,7 +19,7 @@ exports.cronStop = function(next){
 
 exports.cronStart = function(next){
     jobId = rand.generate(10); //randomsrting  
-    return schedule.scheduleJob(jobId, "00 00 23 * * *",function(){
+    return schedule.scheduleJob(jobId, "20 00 23 * * *",function(){
         console.log('hi--viral');
 
         handleUsersMedia(next);
@@ -97,7 +97,7 @@ function handleUsersMedia(next){
                 var mailOptions = {
                     to : "atmet.ghazi@gmail.com",
                     subject : "insta ws cron",
-                    text : "Cron "+user.username+" on "+new Date()+" done"
+                    text : "Cron on "+new Date()+" done"
                 }
                 sendEmail(mailOptions, function(mess){
                     next(new Date()+" done");
