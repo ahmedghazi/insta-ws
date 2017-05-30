@@ -27,6 +27,7 @@ exports.cronStart = function(next){
 };
 
 function handleUsersMedia(next){
+    var message = "";
     User
         .find()
         .populate({
@@ -59,12 +60,13 @@ function handleUsersMedia(next){
                         async.each(body.items, function(item, callback2){
                             max_id = item.id;
                             console.log(max_id)
-                            
+                            if(item.caption)message += item.caption.text+"\r\n";
                             var query = { id: item.id };
+                            var created_time = new Date(item.created_time);
                             var update = {
                                 id: item.id,
                                 type: item.type,
-                                created_time: item.created_time,
+                                created_time: created_time,
                                 //location: item.location.name,
                                 images: item.images,
                                 likes_count: item.likes.count,
@@ -97,7 +99,7 @@ function handleUsersMedia(next){
                 var mailOptions = {
                     to : "atmet.ghazi@gmail.com",
                     subject : "insta ws cron",
-                    text : "Cron on "+new Date()+" done"
+                    text : "Cron on "+new Date()+" done\r\n"+message
                 }
                 sendEmail(mailOptions, function(mess){
                     next(new Date()+" done");
